@@ -27,49 +27,21 @@ USE_CAMERA_STUB := true
 
 # inherit from the proprietary version
 -include vendor/htc/bravoc/BoardConfigVendor.mk
-
-TARGET_NO_BOOTLOADER := true
-
-TARGET_BOARD_PLATFORM := qsd8k
-TARGET_BOARD_PLATFORM_GPU := qcom-adreno200
-
-TARGET_CPU_ABI := armeabi-v7a
-TARGET_CPU_ABI2 := armeabi
-TARGET_ARCH_VARIANT := armv7-a-neon
-ARCH_ARM_HAVE_TLS_REGISTER := true
-
-TARGET_GLOBAL_CFLAGS += -mfpu=neon -mfloat-abi=softfp
-TARGET_GLOBAL_CPPFLAGS += -mfpu=neon -mfloat-abi=softfp
+# inherit common defines for all qsd8k devices
+include device/htc/qsd8k-common/BoardConfigCommon.mk
 
 TARGET_BOOTLOADER_BOARD_NAME := bravoc
 
-# Wifi related defines
-BOARD_WPA_SUPPLICANT_DRIVER := WEXT
-WPA_SUPPLICANT_VERSION      := VER_0_6_X
-BOARD_WLAN_DEVICE           := bcm4329
-WIFI_DRIVER_MODULE_PATH     := "/system/lib/modules/bcm4329.ko"
-WIFI_DRIVER_FW_STA_PATH     := "/vendor/firmware/fw_bcm4329.bin"
-WIFI_DRIVER_FW_AP_PATH      := "/vendor/firmware/fw_bcm4329_apsta.bin"
-WIFI_DRIVER_MODULE_ARG      := "firmware_path=/vendor/firmware/fw_bcm4329.bin nvram_path=/proc/calibration"
-WIFI_DRIVER_MODULE_NAME     := "bcm4329"
-
-BOARD_USES_GENERIC_AUDIO := false
-
 BOARD_KERNEL_CMDLINE := no_console_suspend=1 msmsdcc_sdioirq=1 wire.search_count=5
 BOARD_KERNEL_BASE := 0x20000000
+BOARD_KERNEL_NEW_PPPOX := true
 
-BOARD_HAVE_BLUETOOTH := true
-BOARD_HAVE_BLUETOOTH_BCM := true
+TARGET_KERNEL_CONFIG := bravoc_defconfig
 
-BOARD_VENDOR_QCOM_AMSS_VERSION := 3200
-
-BOARD_VENDOR_USE_AKMD := akm8973
-
-BOARD_EGL_CFG := device/htc/bravoc/egl.cfg
-
-BOARD_USE_FROYO_LIBCAMERA := true
-
-BOARD_USES_QCOM_LIBS := true
+# to enable the GPS HAL
+BOARD_VENDOR_QCOM_GPS_LOC_API_HARDWARE := bravoc
+# AMSS version to use for GPS
+BOARD_VENDOR_QCOM_GPS_LOC_API_AMSS_VERSION := 1240
 
 # # cat /proc/mtd
 # dev:    size   erasesize  name
@@ -81,19 +53,6 @@ BOARD_USES_QCOM_LIBS := true
 # mtd5: 093a0000 00020000 "userdata"
 BOARD_BOOTIMAGE_PARTITION_SIZE := 0x00280000
 BOARD_RECOVERYIMAGE_PARTITION_SIZE := 0x00500000
-BOARD_SYSTEMIMAGE_PARTITION_SIZE := 0x09100000   # limited so we enforce room to grow
-BOARD_USERDATAIMAGE_PARTITION_SIZE := 0x093a0000
+BOARD_SYSTEMIMAGE_PARTITION_SIZE := 262144000 # 0x09100000
+BOARD_USERDATAIMAGE_PARTITION_SIZE := 154140672 # 0x093a0000
 BOARD_FLASH_BLOCK_SIZE := 131072
-
-# Set the system image size limit to the full physical space available for eng build
-ifeq (eng,$(TARGET_BUILD_VARIANT))
-BOARD_SYSTEMIMAGE_PARTITION_SIZE := 0x09000000
-endif
-
-TARGET_RELEASETOOLS_EXTENSIONS := device/htc/common
-TARGET_PREBUILT_KERNEL := device/htc/bravoc/kernel
-
-# to enable the GPS HAL
-BOARD_VENDOR_QCOM_GPS_LOC_API_HARDWARE := bravoc
-# AMSS version to use for GPS
-BOARD_VENDOR_QCOM_GPS_LOC_API_AMSS_VERSION := 1240

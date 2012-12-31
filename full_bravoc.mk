@@ -19,12 +19,14 @@
 # product configuration (apps).
 #
 
-# Inherit from those products. Most specific first.
-$(call inherit-product, device/htc/bravoc/bravoc_us.mk)
-$(call inherit-product, $(SRC_TARGET_DIR)/product/full_base.mk)
+# The gps configuration appropriate for this device
+$(call inherit-product, device/common/gps/gps_us_supl.mk)
 
-# Bravo uses high-density artwork where available
-PRODUCT_LOCALES += hdpi
+# The rest of the configuration is inherited from a generic config
+$(call inherit-product, device/htc/bravoc/bravoc.mk)
+
+# Inherit from those products. Most specific first.
+$(call inherit-product, $(SRC_TARGET_DIR)/product/full_base.mk)
 
 # Discard inherited values and use our own instead.
 PRODUCT_NAME := full_bravoc
