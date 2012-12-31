@@ -15,7 +15,7 @@
 #
 
 #
-# This is the device-specific product configuration for bravoc,
+# This is the device-specific product configuration for bravo,
 # configured with US-specific settings.
 #
 

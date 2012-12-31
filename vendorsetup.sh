@@ -1,4 +1,5 @@
-# Copyright (C) 2009 The Android Open Source Project
+#
+# Copyright (C) 2008 The Android Open Source Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -11,18 +12,13 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-
-#
-# This file is the build configuration for a generic Android
-# build for bravo hardware. This cleanly combines a set of
-# device-specific aspects (drivers) with a device-agnostic
-# product configuration (apps).
 #
 
-# Inherit from those products. Most specific first.
-$(call inherit-product, device/htc/bravoc/bravoc_us.mk)
-$(call inherit-product, $(SRC_TARGET_DIR)/product/generic.mk)
+# This file is executed by build/envsetup.sh, and can use anything
+# defined in envsetup.sh.
+#
+# In particular, you can add lunch options with the add_lunch_combo
+# function: add_lunch_combo generic-eng
 
-# Discard inherited values and use our own instead.
-PRODUCT_NAME := generic_bravoc
-PRODUCT_DEVICE := bravoc
+add_lunch_combo full_bravoc-userdebug
+add_lunch_combo full_bravoc-eng

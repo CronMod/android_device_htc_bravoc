@@ -20,10 +20,13 @@
 #
 
 # Inherit from those products. Most specific first.
-$(call inherit-product, device/htc/bravoc/bravoc_eu.mk)
-$(call inherit-product, $(SRC_TARGET_DIR)/product/full_base_telephony.mk)
+$(call inherit-product, device/htc/bravoc/bravoc_us.mk)
+$(call inherit-product, $(SRC_TARGET_DIR)/product/full_base.mk)
+
+# Bravo uses high-density artwork where available
+PRODUCT_LOCALES += hdpi
 
 # Discard inherited values and use our own instead.
 PRODUCT_NAME := full_bravoc
 PRODUCT_DEVICE := bravoc
-PRODUCT_MODEL := Full Android on Bravoc
+PRODUCT_MODEL := Full Android on Bravo CDMA

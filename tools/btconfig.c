@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-/** Bluetooth configuration for Bravoc (debug only)  */
+/** Bluetooth configuration for Bravo (debug only)  */
 
 #include <stdlib.h>
 #include <stdio.h>
